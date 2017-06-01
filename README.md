@@ -1,8 +1,12 @@
 # A one day topic model workshop
 
-Repository containing everything needed for the topic modeling workshop in Umeå, june 2017.
+This repository contain everything needed for the topic modeling workshop in Umeå, june 2017. You can either just follow the knitty-gritty details of fiting a topic model or try to do it yourself. If you want to do it yourself, you need to download the material and install the software below.
 
-## Installation/software
+## Get the material for the workshop
+
+The easiest way is just to either clone the repository (for those who knows git) or just click on the green button "Clone or Download" -> "Download as ZIP".
+
+## Installation / software
 
 To be able to follow everything in detail, you would need to have R and R-Studio installed. You can find R [here](https://cran.r-project.org/) and R-Studio [here](https://www.rstudio.com/). It is all open source.
 
