@@ -8,7 +8,7 @@ The easiest way is just to either clone the repository (for those who knows git)
 
 ## Installation / software
 
-To be able to follow everything in detail, you would need to have R and R-Studio installed. You can find R [here](https://cran.r-project.org/) and R-Studio [here](https://www.rstudio.com/). It is all open source.
+To be able to follow everything in detail, you would need to have R and R-Studio installed. You can find R [here](https://cran.r-project.org/) (download and install version 3.4.0) and R-Studio [here](https://www.rstudio.com/). It is all open source.
 
 In R we will use a couple of package for text handling. To install it, open R-Studio and in the console run:
 
