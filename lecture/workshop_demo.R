@@ -11,9 +11,10 @@ library(MCMCpack)
 library(ggplot2)
 
 alpha <- 1 * c(3,5,2)
-prob <- MCMCpack::rdirichlet(1, alpha)
+prob <- rdirichlet(1, alpha)
 prob
-ggplot(data = data.frame(prob=t(prob), category = 1:ncol(prob)), aes(x = category, y = prob)) + geom_bar(stat = "identity")
+ggplot(data = data.frame(prob=t(prob), category = 1:ncol(prob)), 
+       aes(x = category, y = prob)) + geom_bar(stat = "identity")
 
 
 
@@ -23,8 +24,8 @@ ggplot(data = data.frame(prob=t(prob), category = 1:ncol(prob)), aes(x = categor
 library(MCMCpack)
 library(ggplot2)
 
-alpha <- 1 * c(3,5,2)
-prob <- MCMCpack::rdirichlet(1, alpha)
+alpha <- 1 * c(1,1,1)
+prob <- rdirichlet(1, alpha)
 prob
 rmultinom(n = 1, size = 1, prob = prob)
 
@@ -59,7 +60,7 @@ z <- list()
 
 alpha <- rep(0.2, K)
 
-# Step 2: Generate a document
+# Step 2: Generate a document 
 for (d in 1:D){
   w[[d]] <- character(n_d[d]); z[[d]] <- integer(n_d[d])
   Theta[d,] <- rdirichlet(n = 1, alpha = alpha)

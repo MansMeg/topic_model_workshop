@@ -31,8 +31,6 @@ View(crps)
 crps$text <- tolower(crps$text)
 ## Ersätt \n (ny rad) med mellanslag
 crps$text <- str_replace_all(crps$text, "\n", " ") 
-## Ersätt \n (ny rad) med mellanslag
-crps$text <- str_replace_all(crps$text, "\n", " ")   
 ## Ersätt punkter med mellanslag
 crps$text <- str_replace_all(crps$text, "[:punct:]", " ")
 ## Ta bort onödiga mellanslag
@@ -80,7 +78,7 @@ topic_model <- MalletLDA(num.topics=20, alpha.sum = 2, beta = 0.1)
 # Lägg till data till modellen
 mallet_data <- 
   mallet.import(id.array = crps_clean$anforande_id, 
-                text.array = crps_clean$text, 
+                text.array = crps_clean$clean_text, 
                 token.regexp = "[\\p{L}0-9]+") # Definition av en token.
 
 topic_model$loadDocuments(mallet_data)
@@ -95,16 +93,16 @@ Phi <- mallet.topic.words(topic_model, smoothed=TRUE, normalized=TRUE)
 dim(Phi)
 
 # Topic att analysera/titta på top p(w|k)
-k <- 6
-mallet.top.words(topic_model, word.weights = phi[k,], num.top.words = 20)
+k <- 14
+mallet.top.words(topic_model, word.weights = Phi[k,], num.top.words = 20)
 
 # Analysera dokument
 Theta <- mallet.doc.topics(topic_model, smoothed=TRUE, normalized=TRUE)
 dim(Theta)
 
 # Visualisera hur ofta ett topic används
-hist(theta[, k])
-doc_idx <- which(theta[, k] > 0.2)
+hist(Theta[, k])
+doc_idx <- which(Theta[, k] > 0.2)
 
 # Låt oss titta på dessa dokument
 crps_clean[doc_idx[1],]$text
