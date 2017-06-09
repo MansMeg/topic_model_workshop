@@ -74,9 +74,10 @@ crps_clean <- tidy_crps %>%
 # Använda Mallet för att skatta modellen
 library(mallet)
 
-# Ställ in vår modell
-topic_model <- MalletLDA(num.topics=20, alpha.sum = 1, beta = 0.1)
+# Skapa vår modell
+topic_model <- MalletLDA(num.topics=20, alpha.sum = 2, beta = 0.1)
 
+# Lägg till data till modellen
 mallet_data <- 
   mallet.import(id.array = crps_clean$anforande_id, 
                 text.array = crps_clean$text, 
@@ -84,20 +85,22 @@ mallet_data <-
 
 topic_model$loadDocuments(mallet_data)
 
+# Träna en model med 500 MCMC-iterationer
 topic_model$train(500)
 
 
 # Analysera resultatet
 # Analysera topics
-phi <- mallet.topic.words(topic_model, smoothed=TRUE, normalized=TRUE)
-dim(phi)
+Phi <- mallet.topic.words(topic_model, smoothed=TRUE, normalized=TRUE)
+dim(Phi)
 
+# Topic att analysera/titta på top p(w|k)
 k <- 6
 mallet.top.words(topic_model, word.weights = phi[k,], num.top.words = 20)
 
 # Analysera dokument
-theta <- mallet.doc.topics(topic_model, smoothed=TRUE, normalized=TRUE)
-dim(theta)
+Theta <- mallet.doc.topics(topic_model, smoothed=TRUE, normalized=TRUE)
+dim(Theta)
 
 # Visualisera hur ofta ett topic används
 hist(theta[, k])
